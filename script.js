@@ -26,4 +26,5 @@ const restaurantsCleaned = restaurants
     (restaurant.description || restaurant.annotation) &&
     restaurant.image_url
   ))
+  .sort((a, b) => b.editorial_rating - a.editorial_rating)
 console.log(restaurantsCleaned)
