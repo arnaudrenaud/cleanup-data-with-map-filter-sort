@@ -1,11 +1,14 @@
+const { get } = require('lodash');
 const restaurants = require('./restaurants.json');
 
 const restaurantsCleaned = restaurants
   .map(restaurant => ({
     name: restaurant.name,
     address: restaurant.address1,
-    area: restaurant.area && restaurant.area.name,
+    area: get(restaurant, 'area.name'),
     city: restaurant.city,
+    mainCategory: get(restaurant, 'categorisation.primary.name'),
+    secondaryCategory: get(restaurant, 'categorisation.secondary.name'),
     editorial_rating: restaurant.editorial_rating,
     description: restaurant.description,
     annotation: restaurant.annotation,
