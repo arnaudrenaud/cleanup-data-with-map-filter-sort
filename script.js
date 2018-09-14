@@ -8,12 +8,22 @@ const restaurantsCleaned = restaurants
     area: get(restaurant, 'area.name'),
     city: restaurant.city,
     mainCategory: get(restaurant, 'categorisation.primary.name'),
-    secondaryCategory: get(restaurant, 'categorisation.secondary.name'),
+    secondaryCategory: get(restaurant, 'categorisation.secondary.name', ''),
     editorial_rating: restaurant.editorial_rating,
-    description: restaurant.description,
-    annotation: restaurant.annotation,
-    owner_annotation: restaurant.owner_annotation,
-    url: restaurant.to_website,
+    description: get(restaurant, 'description', ''),
+    annotation: get(restaurant, 'annotation', ''),
+    owner_annotation: get(restaurant, 'owner_annotation', ''),
+    to_website: get(restaurant, 'to_website', ''),
     image_url: restaurant.image_url,
   }))
+  .filter(restaurant => (
+    restaurant.name &&
+    restaurant.address &&
+    restaurant.area &&
+    restaurant.city &&
+    restaurant.mainCategory &&
+    restaurant.editorial_rating &&
+    (restaurant.description || restaurant.annotation) &&
+    restaurant.image_url
+  ))
 console.log(restaurantsCleaned)
