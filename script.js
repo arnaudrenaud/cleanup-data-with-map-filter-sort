@@ -15,6 +15,8 @@ const restaurantsCleaned = restaurants
     owner_annotation: get(restaurant, 'owner_annotation', ''),
     to_website: get(restaurant, 'to_website', ''),
     image_url: restaurant.image_url,
+    latitude: restaurant.latitude,
+    longitude: restaurant.longitude,
   }))
   .filter(restaurant => (
     restaurant.name &&
