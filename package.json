@@ -5,6 +5,7 @@
   "author": "Arnaud Renaud <arnaud.renaud@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "fs-promise": "^2.0.3",
     "lodash": "^4.17.11"
   }
 }

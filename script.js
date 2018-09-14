@@ -1,4 +1,5 @@
 const { get } = require('lodash');
+const { writeFile } = require('fs-promise')
 const restaurants = require('./restaurants.json');
 
 const restaurantsCleaned = restaurants
@@ -30,3 +31,6 @@ const restaurantsCleaned = restaurants
   ))
   .sort((a, b) => b.editorial_rating - a.editorial_rating)
 console.log(restaurantsCleaned)
+
+writeFile('restaurants-cleaned.json', JSON.stringify(restaurantsCleaned, null, '\t'))
+  .then(() => console.log('Wrote to file successfully'))
