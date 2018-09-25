@@ -4,6 +4,7 @@ const restaurants = require('./restaurants.json');
 
 const restaurantsCleaned = restaurants
   .map(restaurant => ({
+    id: restaurant.id,
     name: restaurant.name,
     address: restaurant.address1,
     area: get(restaurant, 'area.name'),
@@ -20,6 +21,7 @@ const restaurantsCleaned = restaurants
     longitude: restaurant.longitude,
   }))
   .filter(restaurant => (
+    restaurant.id &&
     restaurant.name &&
     restaurant.address &&
     restaurant.area &&
@@ -31,6 +33,14 @@ const restaurantsCleaned = restaurants
   ))
   .sort((a, b) => b.editorial_rating - a.editorial_rating)
 console.log(restaurantsCleaned)
+
+Array.prototype.unique = function() {
+  return this.filter(function (value, index, self) {
+    return self.indexOf(value) === index;
+  });
+}
+console.log('Number of restaurants', restaurantsCleaned.length)
+console.log('Number of unique IDs', restaurantsCleaned.map(restaurant => restaurant.id).unique().length)
 
 writeFile('restaurants-cleaned.json', JSON.stringify(restaurantsCleaned, null, '\t'))
   .then(() => console.log('Wrote to file successfully'))
